@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lobster&display=swap"
+      rel="stylesheet"
+    />
+    <title>Profile</title>
+    <script src="/scripts/profile.js" defer></script>
+    <link rel="stylesheet" href="/styles/output.css" />
+    <style>
+      .delete {
+        position: absolute;
+        /* left: 50px; */
+      }
+    </style>
+  </head>
+  <body>
+    <header class="bg-slate-900 h-48">
+      <!-- header container -->
+      <div class="flex justify-between p-6 mx-auto max-w-7xl">
+        <a href="#" class="text-yellow-300 text-3xl font-serif">Welcome</a>
+        <!-- menu -->
+        <div class="flex space-x-6 text-white text-lg items-center">
+          <div class="group">
+            <a href="/">Main</a>
+            <div class="mx-2 group-hover:border-b"></div>
+          </div>
+          <form action="/logout" method="POST">
+            <button
+              class="px-4 py-1 rounded bg-yellow-300 text-slate-600 hover:bg-amber-400 duration-200"
+            >
+              Logout
+            </button>
+          </form>
+        </div>
+      </div>
+    </header>
+
+    <section class="flex flex-col space-y-6 md:flex-row md:space-x-6 md:space-y-0 px-4">
+      <!-- profile menu -->
+      <div class="flex flex-col space-y-4 py-8 h-96 w-60 justify-center">
+        <button
+          id="carformbtn"
+          class="text-center shadow-xl py-4 text-slate-600 hover:shadow-slate-600/30 hover:scale-110 duration-200"
+        >
+          Upload a Car
+        </button>
+        <button
+          id="carhistory"
+          class="shadow-xl text-slate-600 py-4 hover:shadow-slate-600/30 hover:scale-110 duration-200"
+        >
+          view history
+        </button>
+        <!-- <button
+          class="shadow-xl text-slate-600 py-4 hover:shadow-slate-600/30 hover:scale-110 duration-200"
+        >
+          Account settings
+        </button>
+        <button
+          id="deleteaccount"
+          class="shadow-xl text-slate-600 py-4 hover:shadow-slate-600/30 hover:scale-110 duration-200"
+        >
+          Delete Account
+        </button> -->
+      </div>
+
+      <!-- main content -->
+      <!-- container -->
+      <div class="flex justify-center items-center flex-1">
+        <p
+          id="success"
+          class="bg-green-500 p-6 w-1/2 rounded-lg shadow-xl text-2xl text-center hidden"
+        ></p>
+        <!-- upload form -->
+        <form
+          id="form"
+          enctype="multipart/form-data"
+          class="relative hidden bg-slate-900 grid grid-cols-2 gap-2 gap-y-4 shadow-xl rounded-lg p-4 mt-8 w-full md:w-1/2"
+        >
+          <h1 class="mb-4 font-serif text-2xl text-yellow-300">Car details</h1>
+          <p class="absolute left-4 top-12 text-red-500">*All fields are necessary</p>
+          <p
+            id="error"
+            class="bg-red-500 w-full text-center flex items-center justify-center rounded hidden"
+          >
+          </p>
+          <input
+            type="text"
+            placeholder="Brand"
+            id="brand"
+            name="brand"
+            class="col-span-2 p-2 border-2 rounded focus:outline-0"
+          />
+          <input
+            type="text"
+            placeholder="Model"
+            id="model"
+            name="model"
+            class="col-span-2 p-2 border-2 rounded focus:outline-0"
+          />
+          <input
+            type="text"
+            placeholder="Price"
+            id="price"
+            name="price"
+            class="p-2 border-2 rounded focus:outline-0"
+          />
+          <input
+            type="number"
+            placeholder="year Manufactured"
+            id="year"
+            name="year"
+            class="p-2 border-2 rounded focus:outline-0"
+          />
+          <input
+            type="number"
+            placeholder="Mileage (in Km)"
+            id="mileage"
+            name="mileage"
+            class="col-span-2 p-2 border-2 rounded focus:outline-0"
+          />
+          <input
+            type="text"
+            placeholder="address"
+            name="address"
+            id="address"
+            class="col-span-2 p-2 border-2 rounded focus:outline-0"
+          />
+          <textarea
+            name="description"
+            cols="5"
+            placeholder="car description"
+            id="description"
+            rows="5"
+            class="col-span-2 p-2 border-2 rounded focus:outline-0"
+          ></textarea>
+          <div>
+            <p class="text-red-500">*Min 1,Max 10, Max size 3MB each</p>
+            <p class="text-red-500">jpeg, jpg, png</p>
+            <label for="images" class="hover:cursor-pointer">
+              <h2 class="text-white">Add images</h2>
+              <img src="/assets/up.png" alt="" class="w-1/2 h-16 rounded-lg" />
+              <input
+                type="file"
+                id="images"
+                name="images"
+                multiple
+                class="hidden"
+              />
+            </label>
+          </div>
+          <button
+            type="submit"
+            id="btn-submit"
+            class="bg-yellow-300 text-slate-600 p-1 col-span-2 rounded hover:bg-yellow-400 duration-200"
+          >
+            Submit
+          </button>
+        </form>
+        <!-- car history box -->
+        <div class="grid md:grid-cols-2 gap-16 px-4 flex-1 max-w-4xl" id="history-container">
+          <!-- items will be rendered by javascript -->
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+#header-main{
+    background-image: url('../assets/bg-auth.jpg');
+    background-repeat: repeat;
+    background-size: cover;
+    background-position: 50px -350px;
+}
+

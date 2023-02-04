@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Details</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lobster&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles/output.css" />
+    <script src="/scripts/details.js" defer></script>
+    <style>
+      .fade {
+        animation-name: fade;
+        animation-duration: 1s;
+      }
+
+      @keyframes fade {
+        from {
+          opacity: 0.1;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="bg-slate-900 h-48">
+      <!-- header container -->
+      <div class="flex justify-between p-6 mx-auto max-w-7xl">
+        <a href="#" class="text-yellow-300 text-3xl font-serif">Welcome</a>
+        <!-- menu -->
+        <div class="flex space-x-6 text-white text-lg items-center">
+          <div class="group">
+            <a href="/">Main</a>
+            <div class="mx-2 group-hover:border-b"></div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section class="px-4">
+      <!-- main container -->
+      <div
+        class="relative max-w-4xl my-32 mx-auto rounded-lg overflow-hidden bg-slate-900"
+      >
+        <button
+          id="prev"
+          class="z-40 absolute top-48 left-0 text-white bg-gray-500/50 p-4 mt-[-20px] hover:bg-gray-800/60 duration-200 rounded-r"
+        >
+          &#10094;
+        </button>
+        <button
+          id="next"
+          class="z-40 absolute top-48 right-0 text-white bg-gray-500/50 p-4 mt-[-20px] hover:bg-gray-800/60 duration-200 rounded-l"
+        >
+          &#10095;
+        </button>
+        <span class="z-40 absolute text-lg p-2 text-white" id="counter"
+          >1/4</span
+        >
+
+        <!-- carousel container -->
+        <div id="slides">
+          <% for(let i = 0; i < car.images.length; i++){ %>
+          <img
+            src="/<%= car.images[i].dataValues.address %> "
+            alt="image"
+            class="h-96 w-full object-cover hidden fade"
+          />
+          <% } %>
+        </div>
+        <!-- detais -->
+        <div class="p-4 text-white">
+          <div class="border-b border-white py-4">
+            <h1 class="text-2xl"><%= car.brand %> <%= car.model %></h1>
+            <p>price : <%= car.price %>$</p>
+            <p>mileage : <%= car.mileage %>KM</p>
+            <p>manufacturing year: <%= car.year %></p>
+          </div>
+          <div class="py-4 border-b border-white">
+            <h1 class="text-2xl">Description</h1>
+            <p><%= car.description %></p>
+          </div>
+          <!-- location -->
+          <div class="py-4">
+            <h1>Location : <%= car.address %></h1>
+          </div>
+          <div class="py-2">
+            Tel: <%= car.tel %> 
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

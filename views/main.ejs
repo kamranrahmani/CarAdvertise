@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lobster&display=swap"
+      rel="stylesheet"
+    />
+    <title>main</title>
+    <link rel="stylesheet" href="/styles/output.css" />
+  </head>
+  <body class="h-screen">
+    <!-- header -->
+   <header id="header-main" class="h-96">
+    <div
+      class="flex justify-between p-6 items-center max-w-7xl mx-auto md:mb-12"
+    >
+      <a
+        href="/"
+        class="text-white text-3xl text-yellow-400 hover:scale-110 duration-500 font-serif"
+        >Car Dealer</a
+      >
+      <!-- menu -->
+      <div class="flex space-x-4 text-white">
+        <% if(!locals.isAuth){ %> 
+        <div class="group">
+          <a href="/login" class="text-lg">Login</a>
+          <div
+            class="mx-2 group-hover:border-b group-hover:border-blue-50"
+          ></div>
+        </div>
+
+        <div class="group">
+          <a href="/signup" class="text-lg px-4 py-2 bg-yellow-300 rounded-md text-slate-900 duration-200 hover:text-slate-900 hover:bg-amber-300">Sign up</a>
+        </div>
+        <% } else{%>
+            <div>
+              <a href="/profile" class="text-lg px-4 py-2 bg-yellow-300 rounded-md text-slate-900 duration-200 hover:text-slate-900 hover:bg-amber-300">Profile</a>
+            </div>
+          <% } %>  
+      </div>
+    </div>
+   </header>
+   <!-- cars and filter form -->
+   <section class="mb-16">
+    <!-- main container -->
+    <div class="flex flex-col space-y-8 md:flex-row md:space-x-6 md:space-y-0 items-center my-8 px-2">
+      <form action="/filter" method="GET" class="bg-slate-900/70 flex flex-col space-y-2 shadow-xl px-4 py-2 rounded w-[90%] mx-auto md:w-[25%]">
+        <h1 class="text-center text-xl">Filter</h1>
+        <div>
+          <label for="price" class="block">price</label>
+          <input type="number" id="price" placeholder="Max price" name="price" class="p-1 rounded focus:outline-none w-full">
+        </div>
+        <div>
+          <label for="mileage" class="block">mileage</label>
+          <input type="number" id="mileage" placeholder="Max mileage" name="mileage" class="p-1 rounded focus:outline-none w-full">
+        </div>
+        <div>
+          <label for="year" class="block">year</label>
+          <input type="number" id="year" placeholder="production year" name="year" class="p-1 rounded focus:outline-none w-full">
+        </div>
+        <div class="w-full">
+          <label for="brand" class="block">Brand</label>
+          <select name="brand" id="brand" class="p-1 rounded w-full focus:outline-none w-full">
+            <option value="ALL">ALL</option>
+            <% for(const car of cars){ %>
+              <option value="<%= car.dataValues.brand.id %> "><%= car.dataValues.brand.brandName %> </option>
+            <% } %>  
+          </select>
+        </div>
+       <button class="bg-yellow-400 w-full text-center rounded p-1 mt-4 hover:bg-yellow-300 duration-200">filter results</button>
+      </form>
+
+      <!-- cars list container -->
+      <div class="grid md:grid-cols-2 px-2 gap-8 basis-full w-[90%] md:self-start" id="cars-container">
+
+        <!-- items -->
+        <% for(const car of cars){ %> 
+        <div class="relative flex flex-col space-y-2 rounded shadow-2xl overflow-hidden">
+          <img src="/<%= car.dataValues.images[0].address %> " alt="" class="w-full h-56 object-cover">
+          <!-- details -->
+          <div class="px-2">
+            <div class="flex justify-between items-center">
+              <h1 class="text-2xl"><%= car.dataValues.brand.brandName %> <%= car.dataValues.model.modelName %>  </h1>
+              <p class="text-xl"><%= car.dataValues.price %>$</p>
+            </div>
+            <div class="flex justify-between items-center py-2">
+              <p><%= car.dataValues.year %> </p>
+              <a href="/<%= car.dataValues.id %> /details" class="px-4 py-1 bg-gradient-to-r from-slate-800 via-slate-600 to-yellow-400 rounded-sm text-white hover:opacity-90 duration-200">View Details</a>
+            </div>
+          </div>
+        </div>
+        <% } %> 
+      </div>
+
+
+    </div>
+
+
+   </section>
+  </body>
+</html>
