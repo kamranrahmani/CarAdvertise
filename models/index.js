@@ -4,14 +4,7 @@ const dbConfig = require('../database/config');
 const sequelize = new Sequelize(dbConfig.db,dbConfig.username , dbConfig.password, 
     {
         host: dbConfig.host,
-        dialect: dbConfig.dialect,
-
-        pool:{
-            max: dbConfig.max,
-            min: dbConfig.min,
-            acquire: dbConfig.acquire,
-            idle: dbConfig.idle
-        }
+        dialect: dbConfig.dialect 
     });
 
 sequelize.authenticate().
