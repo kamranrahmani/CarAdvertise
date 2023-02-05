@@ -67,13 +67,12 @@ async function loadcars(){
                 Delete</button>
             </form>
 
-            <div class="overflow-hidden w-full h-80">
+            
               <img
                 src= /${data[i].images[0].address}
                 alt="car image"
-                class="object-fit group-hover:scale-110 duration-200"
+                class="object-fit group-hover:scale-110 duration-200 w-full h-56"
               />
-            </div>
             <div id="details" class="p-2">
               <div class="flex justify-between items-center">
                 <h2 class="text-2xl font-bold">${data[i].brand.brandName} ${data[i].model.modelName}</h2>
@@ -85,8 +84,6 @@ async function loadcars(){
          items += item; 
         }
         historyContainer.innerHTML = items;
-    }else{
-        console.log(data);
     }
 
 

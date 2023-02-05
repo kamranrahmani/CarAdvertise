@@ -37,36 +37,36 @@
       class="flex items-center justify-center text-white space-x-16 p-6"
     >
     <!-- sign up form -->
-      <div class="bg-slate-600 text-black flex flex-col space-y-4 p-6 rounded">
+      <div class="bg-slate-600 text-black flex flex-col space-y-4 p-6 rounded w-full md:w-2/5">
         <h2 class="text-2xl mb-4 text-slate-400 font-serif">Sign up form</h2>
           <% if(inputData){ %>
             <p class="text-center rounded bg-red-400 text-slate-700" id="signup-error"><%= inputData.errMessage %> </p>
           <% } %>  
           
-        <form action="/signup" method="POST" class="grid grid-cols-2 gap-4">
+        <form action="/signup" method="POST" class="flex flex-col space-y-2">
           <input
             type="text"
             name="email"
-            class="w-96 col-span-2 p-2 border border-gray-600 rounded focus:outline-0"
+            class="p-2 border border-gray-600 rounded focus:outline-0"
             placeholder="Email"
           />
           <input
             type="text"
             name="confirm-email"
-            class="col-span-2 p-2 border border-gray-600 rounded focus:outline-0"
+            class="p-2 border border-gray-600 rounded focus:outline-0"
             placeholder="confirm Email"
           />
           <input
             type="text"
             name="phone"
             placeholder="phone number"
-            class="col-span-2 p-2 border border-gray-600 rounded focus:outline-0"
+            class="p-2 border border-gray-600 rounded focus:outline-0"
           />
           <input
             type="password"
             name="password"
             placeholder="password"
-            class="col-span-2 p-2 border border-gray-600 rounded focus:outline-0"
+            class="p-2 border border-gray-600 rounded focus:outline-0"
           />
           <button
             class="bg-yellow-400 p-1 col-span-2 text-slate-700 rounded hover:bg-yellow-500 duration-200"
