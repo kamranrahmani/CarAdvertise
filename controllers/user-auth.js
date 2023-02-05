@@ -180,7 +180,9 @@ async function passwordReset(req,res){
 function logout(req,res){
     req.session.isAuth = false;
     req.session.user = null;
-    res.redirect('/');
+    req.session.save(function(){
+        res.redirect('/');
+    })
 }
 
 //********** GET USER PROFILE ***********/
@@ -194,10 +196,6 @@ function getUserProfile(req,res){
     }
 }
 
-function main(req,res){
-    res.render('main');
-}
-
 
 module.exports = {
     getSignUp, signup,
@@ -205,7 +203,6 @@ module.exports = {
     getPasswordReset,passwordReset,
     logout,
     getUserProfile,
-    main
 }
 
 

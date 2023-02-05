@@ -1,7 +1,7 @@
 module.exports = {
-  host: "SG-webdev-projects-7168-mysql-master.servers.mongodirector.com",
-  db: "caradvertise",
-  username: "root1",
-  password: "Microstrip@911",
+  host: process.env.DATABASE_URL,
+  db: process.env.DATABASE_NAME,
+  username: DATABASE_USERNAME,
+  password: DATABASE_PASSWORD,
   dialect: "mysql"
 };

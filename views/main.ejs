@@ -74,8 +74,8 @@
           <label for="brand" class="block">Brand</label>
           <select name="brand" id="brand" class="p-1 rounded w-full focus:outline-none w-full">
             <option value="ALL">ALL</option>
-            <% for(const car of cars){ %>
-              <option value="<%= car.dataValues.brand.id %> "><%= car.dataValues.brand.brandName %> </option>
+            <% for(const brand of brands){ %>
+              <option value="<%= brand.dataValues.id %>"><%= brand.dataValues.brandName %> </option>
             <% } %>  
           </select>
         </div>
@@ -93,10 +93,10 @@
           <div class="px-2">
             <div class="flex justify-between items-center">
               <h1 class="text-2xl"><%= car.dataValues.brand.brandName %> <%= car.dataValues.model.modelName %>  </h1>
-              <p class="text-xl"><%= car.dataValues.price %>$</p>
+              <p class="text-xl">price: <%= car.dataValues.price %>$</p>
             </div>
             <div class="flex justify-between items-center py-2">
-              <p><%= car.dataValues.year %> </p>
+              <p>year:<%= car.dataValues.year %> </p>
               <a href="/<%= car.dataValues.id %> /details" class="px-4 py-1 bg-gradient-to-r from-slate-800 via-slate-600 to-yellow-400 rounded-sm text-white hover:opacity-90 duration-200">View Details</a>
             </div>
           </div>

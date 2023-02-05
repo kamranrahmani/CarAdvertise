@@ -27,6 +27,11 @@ async function saveCar(req,res){
                 res.status(400).send(JSON.stringify(message));
                 return;
             }
+            if(req.files.length == 0){
+                message.text = 'please add at least one image',
+                res.status(400).send(JSON.stringify(message));
+                return
+            }
             const brandId  = (await brands.findOrCreate({where:{brandName:carData.brand.toUpperCase()}}))[0].dataValues.id;
             const modelId = (await models.findOrCreate({where:{modelName:carData.model.toUpperCase()}}))[0].dataValues.id;
             let carObject = {
@@ -39,6 +44,7 @@ async function saveCar(req,res){
                 description: carData.description,
                 address: carData.address
             }
+            
             const car = await cars.create(carObject);
             for(let i = 0 ; i < req.files.length; i++){
                 let image = {
@@ -57,8 +63,6 @@ async function saveCar(req,res){
             res.status(500).send(JSON.stringify(message));
         }
     })
-    
-
 }
 
 async function LoadCars(req,res){
@@ -84,7 +88,7 @@ async function LoadCars(req,res){
             res.render('details',{car:carsent});
             return
         }catch(err){
-            // res.render('500');      // error page;
+            res.render('500');      // error page;
             return
         }
     }
@@ -104,13 +108,15 @@ async function LoadCars(req,res){
 
 async function getAllCars(req,res){
     const fetchedCars = await cars.findAll({include:[{model:brands},{model:models}, {model:images}]}); 
-    res.render('main', {cars:fetchedCars});
+    const fetchedBrands = await brands.findAll();
+    res.render('main', {cars:fetchedCars, brands:fetchedBrands});
 }
 
 async function filter(req,res){
     const queryObject = filterquery(req.query);
     const filteredCars = await cars.findAll({include:[{model:brands},{model:models}, {model:images}] , where:queryObject});
-    res.render('main', {cars:filteredCars});
+    const fetchedBrands = await brands.findAll();
+    res.render('main', {cars:filteredCars, brands:fetchedBrands});
 }
 
 

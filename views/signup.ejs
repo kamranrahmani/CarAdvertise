@@ -45,28 +45,32 @@
           
         <form action="/signup" method="POST" class="flex flex-col space-y-2">
           <input
-            type="text"
+            type="email"
             name="email"
             class="p-2 border border-gray-600 rounded focus:outline-0"
             placeholder="Email"
+            required
           />
           <input
-            type="text"
+            type="email"
             name="confirm-email"
             class="p-2 border border-gray-600 rounded focus:outline-0"
             placeholder="confirm Email"
+            required
           />
           <input
             type="text"
             name="phone"
             placeholder="phone number"
             class="p-2 border border-gray-600 rounded focus:outline-0"
+            required
           />
           <input
             type="password"
             name="password"
             placeholder="password"
             class="p-2 border border-gray-600 rounded focus:outline-0"
+            required
           />
           <button
             class="bg-yellow-400 p-1 col-span-2 text-slate-700 rounded hover:bg-yellow-500 duration-200"

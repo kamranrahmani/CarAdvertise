@@ -41,10 +41,10 @@ app.use((req,res,next)=>{
 
 app.use(routes);
 
-app.use(function(err,req,res,next){
-  res.render('500');
-  return next();
-})
+// app.use(function(err,req,res,next){
+//   res.render('500');
+//   return next();
+// })
 
 app.listen(port, ()=>{
   console.log(`server is listening on port ${port}`);
