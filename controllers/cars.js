@@ -3,7 +3,8 @@ const brands = require('../models/index').brands;
 const models = require('../models/index').models;
 const images = require('../models/index').images;
 const users = require('../models/index').users;
-const upload = require('../utils/multerMiddleware');
+const {uploadObj, bucket} = require('../utils/multerMiddleware');
+const uuid = require('uuid');
 const filterquery = require('../utils/filter').filterQuery;
 
 
@@ -11,7 +12,7 @@ const filterquery = require('../utils/filter').filterQuery;
 async function saveCar(req,res){
     let message = {}
 
-    upload(req,res, async function(err){
+    uploadObj(req,res, async function(err){
         try{
 
             let carData = req.body;
@@ -47,11 +48,35 @@ async function saveCar(req,res){
             
             const car = await cars.create(carObject);
             for(let i = 0 ; i < req.files.length; i++){
-                let image = {
-                    address: req.files[i].path,
-                    carId : car.id
+                let extArray = req.files[i].mimetype.split("/");
+                let extension = extArray[extArray.length - 1];
+                const imageName = Date.now() + '-' + uuid.v4() + '.'+extension;
+                const blob = bucket.file(imageName);
+                const blobStream = blob.createWriteStream();
+
+                if(blobStream.errored){
+                    message.text = 'error happened while uploading files'
+                    console.log('an ERROR HAPPENED');
+                    
+                    res.status(400).send(JSON.stringify(message));
+                     return 
                 }
-                await images.create(image);
+                blobStream.on('finish', ()=>{
+                    const imgAddress = `https://storage.googleapis.com/${process.env.GCS_BUCKET}/${blob.name}`;
+                    let image = {
+                        address: imgAddress,
+                        carId : car.id
+                    }
+                    images.create(image)
+                })
+                blobStream.end(req.files[i].buffer);
+
+                // this code was for storing image on file system beofre migrate to cloud
+                // let image = {
+                //     address: req.files[i].path,
+                //     carId : car.id
+                // }
+                // await images.create(image);
             }
     
             message.text = "Car added successfully";
@@ -60,7 +85,7 @@ async function saveCar(req,res){
         }
         catch(err){
             message.text = err.message;
-            res.status(500).send(JSON.stringify(message));
+            res.status(400).send(JSON.stringify(message));
         }
     })
 }
@@ -108,6 +133,7 @@ async function LoadCars(req,res){
 
 async function getAllCars(req,res){
     const fetchedCars = await cars.findAll({include:[{model:brands},{model:models}, {model:images}]}); 
+    console.log(fetchedCars);
     const fetchedBrands = await brands.findAll();
     res.render('main', {cars:fetchedCars, brands:fetchedBrands});
 }

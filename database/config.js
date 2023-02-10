@@ -5,3 +5,11 @@ module.exports = {
   password:process.env.DATABASE_PASSWORD,
   dialect: "mysql"
 };
+
+// module.exports = {
+//   host: 'localhost',
+//   db: 'car_advertise',
+//   username: 'root',
+//   password:'kamran911',
+//   dialect: "mysql"
+// };

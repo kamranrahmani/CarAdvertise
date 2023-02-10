@@ -69,7 +69,7 @@ async function loadcars(){
 
             
               <img
-                src= /${data[i].images[0].address}
+                src= ${data[i].images[0].address}
                 alt="car image"
                 class="object-fit group-hover:scale-110 duration-200 w-full h-56"
               />

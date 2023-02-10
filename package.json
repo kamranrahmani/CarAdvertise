@@ -15,6 +15,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@google-cloud/storage": "^6.9.2",
     "bcrypt": "^5.1.0",
     "connect-session-sequelize": "^7.1.5",
     "ejs": "^3.1.8",
