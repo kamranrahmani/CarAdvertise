@@ -10,6 +10,6 @@ module.exports = {
 //   host: 'localhost',
 //   db: 'car_advertise',
 //   username: 'root',
-//   password:'kamran911',
+//   password:'',
 //   dialect: "mysql"
 // };

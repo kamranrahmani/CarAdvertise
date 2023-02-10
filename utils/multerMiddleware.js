@@ -1,6 +1,7 @@
 const multer = require('multer');
 const {Storage} = require('@google-cloud/storage');
 const uuid = require('uuid');
+require('dotenv').config();
 
 const cStorage = new Storage({projectId:process.env.GCLOUD_PROJECT, credentials:{client_email:process.env.GCLOUD_CLIENT_EMAIL, private_key:process.env.GCLOUD_PRIVATE_KEY}});
 
