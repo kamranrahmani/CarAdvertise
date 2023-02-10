@@ -4,7 +4,7 @@ const uuid = require('uuid');
 
 const cStorage = new Storage({projectId:process.env.GCLOUD_PROJECT, credentials:{client_email:process.env.GCLOUD_CLIENT_EMAIL, private_key:process.env.GCLOUD_PRIVATE_KEY}});
 
-const bucket = cStorage.bucket('car-advertise-bucket');
+const bucket = cStorage.bucket(process.env.GCS_BUCKET);
 
 //********** multer disk storage config  ****************/
 
