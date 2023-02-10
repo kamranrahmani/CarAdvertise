@@ -62,7 +62,7 @@ async function saveCar(req,res){
                      return 
                 }
                 blobStream.on('finish', ()=>{
-                    const imgAddress = `https://storage.googleapis.com/${process.env.GCS_BUCKET}/${blob.name}`;
+                    const imgAddress = `https://storage.googleapis.com/car-advertise-bucket/${blob.name}`;
                     let image = {
                         address: imgAddress,
                         carId : car.id
