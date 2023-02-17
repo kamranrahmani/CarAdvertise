@@ -85,7 +85,7 @@ async function saveCar(req,res){
         }
         catch(err){
             message.text = err.message;
-            res.status(400).send(JSON.stringify(message));
+            res.status(500).send(JSON.stringify(message));
         }
     })
 }
